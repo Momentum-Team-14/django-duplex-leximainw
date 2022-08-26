@@ -1,0 +1,162 @@
+body
+{
+    margin: auto;
+    width: 80%;
+    background-color: #f0f0f0;
+    color: #303030;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header
+{
+    background-color: #083d77;
+    border-bottom: 3px solid #90ddf0;
+    padding: 2rem 0;
+}
+
+header *
+{
+    color: #f0f0f0;
+}
+
+/* header h1
+{
+    display: flex;
+    align-items: center;
+} */
+
+header h1 .subtitle
+{
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+/* header h1 img
+{
+    margin-right: 1rem;
+    height: 4rem;
+} */
+
+header nav
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    color: #f0f0f0;
+}
+
+header nav a
+{
+    color: #afaff8;
+}
+
+#content
+{
+    background-color: #fff;
+    min-height: 100vh;
+}
+
+#login-modal .spacer
+{
+    position: relative;
+}
+
+#login-modal .flex
+{
+    position: absolute;
+    overflow: hidden;
+    right: 0%;
+}
+
+#login-modal .border
+{
+    display: none;
+    background-color: #bfb;
+    border-radius: 0 0 1rem 1rem;
+    padding: 0.5rem;
+}
+
+#login-modal .grid
+{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+h1
+{
+    margin: 0;
+}
+
+.spacer
+{
+    margin: auto;
+    width: 90%;
+}
+
+.thin.spacer
+{
+    width: 95%;
+}
+
+.invert
+{
+    filter: invert()
+}
+
+main
+{
+    padding: 1rem 0;
+}
+
+main h1
+{
+    padding: 0 0 1rem;
+}
+
+.text-sm
+{
+    font-size: 0.8em;
+    color: #bbb;
+}
+
+.text-right
+{
+    text-align: right;
+}
+
+.error
+{
+    padding: 0.5rem 1rem;
+    background-color: #fbb;
+    color: #303030;
+    border-radius: 1rem;
+}
+
+.flex
+{
+    display: flex;
+}
+
+.flex.right
+{
+    justify-content: flex-end;
+}
+
+.flex.between
+{
+    justify-content: space-between;
+}
+
+.grid
+{
+    display: grid;
+}
+
+.favorite
+{
+    text-decoration: none;
+}
+
+.hidden
+{
+    display: none;
+}

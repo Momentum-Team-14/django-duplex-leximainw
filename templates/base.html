@@ -5,10 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>{% if page_title %}{{ page_title }}{% else %}{{ site_title }}{% endif %}</title>
 </head>
 <body>
-    {% block content %}
-    {% endblock %}
+    <div id="content">
+        <header>
+            <div class="spacer">
+                <h1>{% if page_name %}{{ page_name }}{% else %}{{ site_name|safe }}{% endif %}</h1>
+            </div>
+        </header>
+        <main>
+            <div class="spacer">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </main>
+    </div>
 </body>
 </html>

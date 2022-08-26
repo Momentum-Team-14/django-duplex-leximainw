@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'api_snippets',
     'core',
 ]
 
@@ -53,6 +54,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 AUTH_USER_MODEL = 'core.User'
+SITE_TITLE = 'Django Duplex'
+SITE_NAME = '<div>Django Duplex</div><div class="subtitle">A site with miscellaneous Django stuff.</div>'
 
 TEMPLATES = [
     {
@@ -65,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.sitewide',
             ],
         },
     },
