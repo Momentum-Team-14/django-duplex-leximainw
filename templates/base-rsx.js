@@ -1,0 +1,1 @@
+{type:'link',src:'css/bootstrap.min.css',cdn:'https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist',integrity:'sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx'},
