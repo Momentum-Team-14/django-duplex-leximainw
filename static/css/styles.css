@@ -168,3 +168,17 @@ code.hljs
     margin: 1em 0;
     font-family: 'Fira Code', Consolas, 'Courier New', Courier, monospace;
 }
+
+.hljs .hljs-ln-numbers
+{
+    color: #666;
+    background-color: #eee;
+    padding-right: 1rem;
+    border-right: 1px solid #888;
+    text-align: right;
+}
+
+.hljs .hljs-ln-code
+{
+    padding-left: 0.5rem;
+}
