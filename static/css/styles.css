@@ -160,3 +160,11 @@ main h1
 {
     display: none;
 }
+
+code.hljs
+{
+    display: block;
+    white-space: pre;
+    margin: 1em 0;
+    font-family: 'Fira Code', Consolas, 'Courier New', Courier, monospace;
+}

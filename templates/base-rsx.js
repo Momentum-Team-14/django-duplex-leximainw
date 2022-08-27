@@ -1,4 +1,5 @@
 {type:'link',src:'css/bootstrap.min.css',cdn:'https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist',integrity:'sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx'},
 {type:'script',defer:true,src:'js/bootstrap.bundle.min.js',cdn:'https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist',integrity:'sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa'},
-{type:'link',src:'github-dark.min.css',dir:'css',cdn:'https://unpkg.com/@highlightjs/cdn-assets@11.5.0/styles',integrity:'sha384-wH75j6z1lH97ZOpMOInqhgKzFkAInZPPSPlZpYKYTOqsaizPvhQZmAtLcPKXpLyH'},
-{type:'script',defer:true,load:_=>hljs.highlightAll(),src:'highlight.min.js',dir:'js',cdn:'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.0/build',integrity:'sha384-kVKEmRHevryBrAUFa9TvuSD4WEMD5C6t3jukUiZwneduUqXco1QPtPeM38ShDvdT'},
+{type:'link',style:'light',src:'github.min.css',dir:'css',cdn:'https://unpkg.com/@highlightjs/cdn-assets@11.5.0/styles',integrity:'sha384-eFTL69TLRZTkNfYZOLM+G04821K1qZao/4QLJbet1pP4tcF+fdXq/9CdqAbWRl/L'},
+{% comment %} {type:'link',style:'dark',src:'github-dark.min.css',dir:'css',cdn:'https://unpkg.com/@highlightjs/cdn-assets@11.5.0/styles',integrity:'sha384-wH75j6z1lH97ZOpMOInqhgKzFkAInZPPSPlZpYKYTOqsaizPvhQZmAtLcPKXpLyH'}, {% endcomment %}
+{type:'script',defer:true,load:_=>document.querySelectorAll('code.hljs').forEach(hljs.highlightElement),src:'highlight.min.js',dir:'js',cdn:'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.0/build',integrity:'sha384-kVKEmRHevryBrAUFa9TvuSD4WEMD5C6t3jukUiZwneduUqXco1QPtPeM38ShDvdT'},
