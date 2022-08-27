@@ -1,8 +1,6 @@
 <h2>Recent Snippets</h2>
 <div>
     {% for snippet in snippets %}
-    <article>
-        <code>{{ snippet.code }}</code>
-    </article>
+    {% include 'core/snippet.html' %}
     {% endfor %}
 </div>
