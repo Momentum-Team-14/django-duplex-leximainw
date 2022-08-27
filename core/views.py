@@ -1,14 +1,18 @@
 from django.shortcuts import get_object_or_404, render
 from api_snippets.models import Snippet
+from .shortcuts import recent_snippets
 
 
 def homepage(request):
-    return render(request, 'core/homepage.html', {})
+    return render(request, 'core/homepage.html', {'snippets': recent_snippets()})
 
 
 def snippets_recent(request):
-    snippets = Snippet.objects.order_by('created_at').reverse()[:20]
-    return render(request, 'core/recent_snippets_page.html', {'snippets': snippets})
+    return render(request, 'core/recent_snippets_page.html', {'snippets': recent_snippets()})
+
+
+def snippets_create(request):
+    pass
 
 
 def snippets_details(request, pk=None):
