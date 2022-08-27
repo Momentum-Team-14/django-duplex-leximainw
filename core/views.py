@@ -4,11 +4,11 @@ from .shortcuts import recent_snippets
 
 
 def homepage(request):
-    return render(request, 'core/homepage.html', {'snippets': recent_snippets()})
+    return render(request, 'core/homepage.html', {'snippets': recent_snippets(request.user)})
 
 
 def snippets_recent(request):
-    return render(request, 'core/recent_snippets_page.html', {'snippets': recent_snippets()})
+    return render(request, 'core/recent_snippets_page.html', {'snippets': recent_snippets(request.user)})
 
 
 def snippets_create(request):
