@@ -13,7 +13,20 @@
     <div id="content">
         <header>
             <div class="spacer">
-                <h1>{% if page_name %}{{ page_name }}{% else %}{{ site_name|safe }}{% endif %}</h1>
+                <div class="flex between">
+                    <div>
+                        <h1>{% if page_name %}{{ page_name }}{% else %}{{ site_name|safe }}{% endif %}</h1>
+                        <div><a href="/">Homepage</a> &nbsp; <a href="{% url 'Recent Snippets' %}">Recent Snippets</a></div>
+                    </div>
+                    <div class="text-right">
+                        {% if user.is_authenticated %}
+                            <div>Welcome, {{ user.username }}!</div>
+                            <div><a href="/accounts/logout/">Log Out</a></div>
+                        {% else %}
+                            <a href="/accounts/login/">Log In</a> or <a href="/accounts/register/">Register</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </header>
         <main>
