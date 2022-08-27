@@ -21,6 +21,7 @@ class Snippet(models.Model):
     title: models.CharField(max_length=100)
     author: models.ForeignKey(User, on_delete=models.CASCADE, related_name='snippets')
     description: models.TextField(max_length=2000)
+    created_at = models.DateTimeField(auto_now_add=True)
     anyone_can: SnippetPermissionSet()
     language: models.ForeignKey(Language, on_delete=models.SET_NULL, related_name='snippets', blank=True, null=True)
     language_version: SemVerField()

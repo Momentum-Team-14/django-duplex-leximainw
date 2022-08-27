@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from api_snippets.models import Snippet
 
 
 def homepage(request):
@@ -6,4 +7,5 @@ def homepage(request):
 
 
 def snippets_recent(request):
-    return render(request, 'base.html', {})
+    snippets = Snippet.objects.order_by('created_at')[:20]
+    return render(request, 'core/recent_snippets_page.html', {'snippets': snippets})
