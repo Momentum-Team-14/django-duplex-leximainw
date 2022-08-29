@@ -1,12 +1,12 @@
-import imp
+from django.db.models import Q
 from api_snippets.models import Snippet
 
-def recent_snippets(user=None, count=20):
+
+def viewable_snippets(user=None):
     if not user.is_authenticated:
         user = None
-    recent = Snippet.objects.order_by('created_at').reverse()[:count]
-    result = []
-    for snippet in recent:
-        if snippet.can_view(user):
-            result.append(snippet)
-    return result
+    return Snippet.objects.filter(Q(allow_view=True) | Q(author=user))
+
+
+def recent_snippets(user=None, count=20):
+    return viewable_snippets(user).order_by('created_at').reverse()[:count]
