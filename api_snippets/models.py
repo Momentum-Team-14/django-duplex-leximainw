@@ -26,3 +26,43 @@ class Snippet(models.Model):
 
     def __str__(self):
         return f"{self.title} by {self.author.username}"
+
+
+defaultLanguages = [
+    {
+        'name': 'C',
+        'hljs_name': 'c',
+    },
+    {
+        'name': 'C++',
+        'hljs_name': 'cpp',
+    },
+    {
+        'name': 'C#',
+        'hljs_name': 'csharp',
+    },
+    {
+        'name': 'Java',
+        'hljs_name': 'java',
+    },
+    {
+        'name': 'JavaScript',
+        'hljs_name': 'js',
+    },
+    {
+        'name': 'Lua',
+        'hljs_name': 'lua',
+    },
+    {
+        'name': 'Python',
+        'hljs_name': 'python',
+    },
+    {
+        'name': 'Rust',
+        'hljs_name': 'rust',
+    },
+]
+
+for default in defaultLanguages:
+    if Language.objects.filter(name=default['name']).count() == 0:
+        Language(**default).save()
