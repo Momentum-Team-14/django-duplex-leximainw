@@ -1,2 +1,2 @@
-<script>rsx=[
+<script defer>rsx=[
 {%include 'base-rsx.js'%}{{page_rsx|safe}}];let h=document.querySelector('head');let s=h.querySelector('.custom-start');let t;for(let r of rsx){let n=document.createElement(r.type);if(r.type=='link'){n.rel=r.rel||'stylesheet'}if(r.type=='script'){n.defer=r.defer}n.href=n.src=r.cdn+'/'+r.src;n.integrity=r.integrity;n.setAttribute('crossorigin','');n.onerror=_=>{m=document.createElement(r.type);m.rel=n.rel;m.onload=n.onload;m.href=m.src='/static/'+(r.dir?r.dir+'/':'')+r.src;n.after(m);n.remove()};n.onload=e=>{if(f=r.load)f(e);if(r.andThen)n.after(n.next)};if(t)t.next=n;else h.insertBefore(n,s);t=r.andThen?n:null}</script>
