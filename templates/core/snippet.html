@@ -1,6 +1,6 @@
 <article class="snippet">
-    <div class="title"><a href="{% url 'Snippet details' pk=snippet.pk %}">{{ snippet.title }}</a></div>
-    {% if user == snippet.author %}<div><a href="{% url 'Edit snippet' pk=snippet.pk %}">Edit Snippet</a></div>{% endif %}
+    <div class="title"><a href="{% url 'Snippet details' pk=snippet.pk %}">{{ snippet.title }}</a>
+    {% if user in snippet.editors.all %}<a href="{% url 'Edit snippet' pk=snippet.pk %}">{% include 'icons/pencil-fill.svg' %}</a>{% endif %}{% if user == snippet.author %}<a href="{% url 'Delete snippet' pk=snippet.pk %}">{% include 'icons/trash-fill.svg' %}</a>{% endif %}</div>
     <div class="by">by {{ snippet.author.username }}</div>
     {% if detailed %}
         <div class="details">{{ snippet.description }}</div>

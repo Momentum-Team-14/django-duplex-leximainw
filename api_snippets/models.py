@@ -21,6 +21,7 @@ class Snippet(models.Model):
     language_version = SemVerField(blank=True, null=True)
     code = models.TextField()
 
+    editors = models.ManyToManyField(User, related_name='shared_snippets')
     allow_forks = models.BooleanField()
     allow_view = models.BooleanField()
 

@@ -17,11 +17,25 @@ def snippets_recent(request):
     return render(request, 'core/recent_snippets_page.html', {'snippets': recent_snippets(request.user)})
 
 
+def snippets_details(request, pk=None):
+    snippet = get_object_or_404(Snippet, pk=pk)
+    return render(request, 'core/snippet_details.html', {
+        'snippet': snippet,
+        'detailed': True
+    })
+
+
 def snippets_edit(request, pk=None):
     if not request.user.is_authenticated:
         raise PermissionDenied()
+    if pk is not None:
+        snippet = get_object_or_404(Snippet, pk=pk)
+        if not request.user in snippet.editors.all():
+            raise PermissionDenied()
+    else:
+        snippet = None
     if request.method == 'POST':
-        form = SnippetForm(request.POST, instance=get_object_or_404(Snippet, pk=pk))
+        form = SnippetForm(request.POST, instance=snippet)
         if form.is_valid():
             if pk is None:
                 snippet = form.save(commit=False)
@@ -30,19 +44,26 @@ def snippets_edit(request, pk=None):
         else:
             return redirect('/')
     else:
-        if pk is None:
-            form = SnippetForm()
-        else:
-            form = SnippetForm(instance=get_object_or_404(Snippet, pk=pk))
+        form = SnippetForm(instance=snippet)
         return render(request, 'core/snippet_edit.html', {
             'form': form,
             'button_text': 'Create' if pk is None else 'Save Changes',
         })
 
 
-def snippets_details(request, pk=None):
+def snippets_delete(request, pk=None):
+    if not request.user.is_authenticated:
+        raise PermissionDenied()
     snippet = get_object_or_404(Snippet, pk=pk)
-    return render(request, 'core/snippet_details.html', {
-        'snippet': snippet,
-        'detailed': True
-    })
+    if request.user != snippet.author:
+        raise PermissionDenied()
+    if request.method == 'POST':
+        if request.POST['confirm'] == snippet.title:
+            snippet.delete()
+            return redirect('Recent snippets')
+        else:
+            return redirect('Snippet details', pk=snippet.pk)
+    else:
+        return render(request, 'core/delete_form.html', {
+            'confirm_text': snippet.title,
+        })

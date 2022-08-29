@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p><div>Are you sure you want to delete {{ confirm_text }}?</div>
+<div>Enter {{ confirm_text }} below to confirm.</div>
+<div>This action cannot be undone!</div></p>
+<form method="POST">
+    {% csrf_token %}
+    <p><label for="confirm">Confirm:</label>
+    <input type="text" name="confirm" id="confirm"></p>
+    <button class="btn btn-danger">Delete</button>
+</form>
+{% endblock %}

@@ -5,7 +5,8 @@ from api_snippets.models import Snippet
 def viewable_snippets(user=None):
     if not user.is_authenticated:
         user = None
-    return Snippet.objects.filter(Q(allow_view=True) | Q(author=user))
+    return Snippet.objects.filter(Q(allow_view=True)
+        | Q(author=user) | Q(editors=user))
 
 
 def recent_snippets(user=None, count=20):

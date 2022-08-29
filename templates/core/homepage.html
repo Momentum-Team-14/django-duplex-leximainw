@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if user.is_authenticated %}<div id="new"><a href="{% url 'Create Snippet' %}">Create New Snippet</a></div>{% endif %}
+{% if user.is_authenticated %}<div id="new"><a href="{% url 'Create snippet' %}">Create New Snippet</a></div>{% endif %}
 <div id="recent">{% include 'core/recent_snippets.html' %}</div>
 {% endblock %}

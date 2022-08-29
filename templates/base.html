@@ -16,7 +16,7 @@
                 <div class="flex between">
                     <div>
                         <h1>{% if page_name %}{{ page_name }}{% else %}{{ site_name|safe }}{% endif %}</h1>
-                        <div><a href="/">Homepage</a> &nbsp; <a href="{% url 'Recent Snippets' %}">Recent Snippets</a></div>
+                        <div><a href="/">Homepage</a> &nbsp; <a href="{% url 'Recent snippets' %}">Recent Snippets</a></div>
                     </div>
                     <div class="text-right">
                         {% if user.is_authenticated %}
