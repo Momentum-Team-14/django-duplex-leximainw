@@ -1,5 +1,6 @@
 <article class="snippet">
     <div class="title"><a href="{% url 'Snippet details' pk=snippet.pk %}">{{ snippet.title }}</a></div>
+    {% if user == snippet.author %}<div><a href="{% url 'Edit snippet' pk=snippet.pk %}">Edit Snippet</a></div>{% endif %}
     <div class="by">by {{ snippet.author.username }}</div>
     {% if detailed %}
         <div class="details">{{ snippet.description }}</div>
