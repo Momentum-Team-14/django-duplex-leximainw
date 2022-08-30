@@ -7,8 +7,9 @@ class SnippetForm(forms.ModelForm):
         model = Snippet
         fields = (
             'title',
-            'allow_forks',
             'allow_view',
+            'allow_forks',
+            'editors',
             'description',
             'language',
             'language_version',

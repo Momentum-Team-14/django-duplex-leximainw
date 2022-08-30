@@ -4,6 +4,7 @@ from django.shortcuts import (
     redirect,
     render,
 )
+from django.http import Http404
 from api_snippets.models import Snippet
 from .forms import SnippetForm
 from .shortcuts import recent_snippets
@@ -19,6 +20,8 @@ def snippets_recent(request):
 
 def snippets_details(request, pk=None):
     snippet = get_object_or_404(Snippet, pk=pk)
+    if not (snippet.allow_view or request.user in snippet.editors.all() or request.user == snippet.author):
+        raise PermissionDenied()
     return render(request, 'core/snippet_details.html', {
         'snippet': snippet,
         'detailed': True
@@ -40,6 +43,9 @@ def snippets_edit(request, pk=None):
             if pk is None:
                 snippet = form.save(commit=False)
                 snippet.author = request.user
+                snippet.save()
+                snippet.editors.add(request.user)
+                snippet.save()
             return redirect('Snippet details', pk=form.save().pk)
         else:
             return redirect('/')
@@ -67,3 +73,18 @@ def snippets_delete(request, pk=None):
         return render(request, 'core/delete_form.html', {
             'confirm_text': snippet.title,
         })
+
+
+def snippets_fork(request, pk=None):
+    if not request.user.is_authenticated:
+        raise PermissionDenied()
+    snippet = get_object_or_404(Snippet, pk=pk)
+    if not (snippet.allow_forks or request.user in snippet.editors.all()):
+        raise PermissionDenied()
+    snippet.pk = None
+    snippet.id = None
+    snippet.author = request.user
+    snippet.save()
+    snippet.editors.add(request.user)
+    snippet.save()
+    return redirect('Snippet details', pk=snippet.pk)

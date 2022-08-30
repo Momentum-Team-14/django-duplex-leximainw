@@ -4,6 +4,6 @@
 <form method="POST">
 {% csrf_token %}
 <table>{{ form.as_table }}</table>
-<button>{{ button_text }}</button>
+<button class="btn btn-primary">{{ button_text }}</button>
 </form>
 {% endblock %}
