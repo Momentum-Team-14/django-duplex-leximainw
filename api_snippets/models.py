@@ -19,6 +19,7 @@ class Snippet(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     language = models.ForeignKey(Language, on_delete=models.SET_NULL, related_name='snippets', blank=True, null=True)
     language_version = SemVerField(blank=True, null=True)
+    parent = models.ForeignKey('Snippet', on_delete=models.SET_NULL, related_name='forks', blank=True, null=True)
     code = models.TextField()
 
     editors = models.ManyToManyField(User, related_name='shared_snippets', blank=True)

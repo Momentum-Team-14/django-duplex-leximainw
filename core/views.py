@@ -81,10 +81,11 @@ def snippets_fork(request, pk=None):
     snippet = get_object_or_404(Snippet, pk=pk)
     if not (snippet.allow_forks or request.user in snippet.editors.all()):
         raise PermissionDenied()
+    snippet.parent = Snippet.objects.get(pk=pk)
     snippet.pk = None
     snippet.id = None
-    snippet.author = request.user
     snippet.save()
+    snippet.author = request.user
     snippet.editors.add(request.user)
     snippet.save()
     return redirect('Snippet details', pk=snippet.pk)
