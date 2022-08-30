@@ -43,6 +43,14 @@ defaultLanguages = [
         'hljs_name': 'csharp',
     },
     {
+        'name': 'CSS',
+        'hljs_name': 'css',
+    },
+    {
+        'name': 'HTML',
+        'hljs_name': 'html',
+    },
+    {
         'name': 'Java',
         'hljs_name': 'java',
     },
@@ -61,6 +69,10 @@ defaultLanguages = [
     {
         'name': 'Rust',
         'hljs_name': 'rust',
+    },
+    {
+        'name': 'XML',
+        'hljs_name': 'xml',
     },
 ]
 
