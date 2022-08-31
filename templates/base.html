@@ -8,7 +8,7 @@
     <link class="custom-start" rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&amp;display=swap">
     <title>{% if page_title %}{{ page_title }}{% else %}{{ site_title }}{% endif %}</title>
-    {% include 'base-rsx.html' %}{{ page_scripts|safe }}</head>
+    {% include 'base-rsx.html' %}</head>
 <body>
     <div id="content">
         <header>
@@ -36,5 +36,6 @@
             </div>
         </main>
     </div>
+    {% block page_scripts %}{% endblock %}
 </body>
 </html>

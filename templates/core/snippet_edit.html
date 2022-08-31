@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block page_scripts %}
+<script>document.getElementsByName('code').forEach(el=>el.classList.add('allow-tabs'))</script>
+<script src="{% static 'js/tab_text_field.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <form method="POST">

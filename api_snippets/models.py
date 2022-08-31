@@ -23,8 +23,8 @@ class Snippet(models.Model):
     code = models.TextField()
 
     editors = models.ManyToManyField(User, related_name='shared_snippets', blank=True)
-    allow_forks = models.BooleanField('Anyone can fork')
-    allow_view = models.BooleanField('Anyone can view')
+    allow_forks = models.BooleanField('Anyone can fork', default=True)
+    allow_view = models.BooleanField('Anyone can view', default=True)
 
     def __str__(self):
         return f"{self.title} by {self.author.username}"
