@@ -109,7 +109,7 @@ def snippets_fork(request, pk=None):
     snippet.parent = Snippet.objects.get(pk=pk)
     snippet.pk = None
     snippet.id = None
-    snippet.save()
     snippet.author = request.user
+    snippet.save()
     snippet.editors.add(request.user)
     return redirect('Snippet details', pk=snippet.pk)
