@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Q
+from django.db.models.signals import post_migrate
 from semantic_version.django_fields import SemVerField
 from core.models import User
 
@@ -77,6 +77,9 @@ defaultLanguages = [
     },
 ]
 
-for default in defaultLanguages:
-    if Language.objects.filter(name=default['name']).count() == 0:
-        Language(**default).save()
+def create_default_languages(**kwargs):
+    for default in defaultLanguages:
+        if Language.objects.filter(name=default['name']).count() == 0:
+            Language(**default).save()
+
+post_migrate.connect(create_default_languages)
