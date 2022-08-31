@@ -23,6 +23,7 @@ class Snippet(models.Model):
     code = models.TextField()
 
     editors = models.ManyToManyField(User, related_name='shared_snippets', blank=True)
+    favorited_by = models.ManyToManyField(User, related_name='favorite_snippets', blank=True)
     allow_forks = models.BooleanField('Anyone can fork', default=True)
     allow_view = models.BooleanField('Anyone can view', default=True)
 
