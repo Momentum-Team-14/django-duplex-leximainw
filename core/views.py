@@ -68,8 +68,9 @@ def snippets_edit(request, pk=None):
                 snippet.author = request.user
                 snippet.save()
                 snippet.editors.add(request.user)
-                snippet.save()
-            return redirect('Snippet details', pk=form.save().pk)
+            else:
+                snippet = form.save()
+            return redirect('Snippet details', pk=snippet.pk)
         else:
             return redirect('/')
     else:
@@ -110,5 +111,4 @@ def snippets_fork(request, pk=None):
     snippet.save()
     snippet.author = request.user
     snippet.editors.add(request.user)
-    snippet.save()
     return redirect('Snippet details', pk=snippet.pk)

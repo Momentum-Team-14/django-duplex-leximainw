@@ -3,10 +3,11 @@ from api_snippets.models import Snippet
 
 
 def viewable_snippets(user=None):
-    if not user.is_authenticated:
-        user = None
-    return Snippet.objects.filter(Q(allow_view=True)
-        | Q(author=user) | Q(editors=user))
+    if user is None or not user.is_authenticated:
+        return Snippet.objects.filter(allow_view=True)
+    else:
+        return Snippet.objects.filter(Q(allow_view=True)
+            | Q(author=user) | Q(editors=user))
 
 
 def recent_snippets(user=None, count=20):
