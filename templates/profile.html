@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ name }} Profile</h2>
+{% if snippets.count %}
+{% include 'core/snippet_list.html' %}
+{% else %}
+No snippets
+{% endif %}
+{% endblock %}

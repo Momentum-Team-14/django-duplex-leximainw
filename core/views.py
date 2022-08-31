@@ -7,11 +7,34 @@ from django.shortcuts import (
 from django.http import Http404
 from api_snippets.models import Snippet
 from .forms import SnippetForm
-from .shortcuts import recent_snippets
+from .models import User
+from .shortcuts import recent_snippets, viewable_snippets
 
 
 def homepage(request):
     return render(request, 'core/homepage.html', {'snippets': recent_snippets(request.user)})
+
+
+def user_profile(request, pk=None):
+    if pk is None:
+        user = request.user
+        if not user.is_authenticated:
+            return redirect('/accounts/login')
+        else:
+            return redirect('User profile', pk=user.pk)
+    else:
+        user = get_object_or_404(User, pk=pk)
+        print(user.pk)
+        print(request.user)
+        if user.pk == request.user.pk:
+            name = "Your"
+        else:
+            name = f"{user.username}'s"
+        return render(request, 'profile.html', {
+            'profile': user,
+            'name': name,
+            'snippets': viewable_snippets(request.user).filter(author=user),
+        })
 
 
 def snippets_recent(request):

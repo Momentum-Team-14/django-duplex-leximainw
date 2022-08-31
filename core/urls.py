@@ -3,6 +3,8 @@ from . import views
 
 urlpatterns = [
     path('', views.homepage, name='Homepage'),
+    path('accounts/profile/', views.user_profile, name='Account profile'),
+    path('accounts/<int:pk>/profile/', views.user_profile, name='User profile'),
     path('snippets/recent/', views.snippets_recent, name='Recent snippets'),
     path('snippets/new/', views.snippets_edit, name='Create snippet'),
     path('snippets/<int:pk>/', views.snippets_details, name='Snippet details'),

@@ -21,7 +21,7 @@
                     <div class="text-right">
                         {% if user.is_authenticated %}
                             <div>Welcome, {{ user.username }}!</div>
-                            <div><a href="/accounts/logout/">Log Out</a></div>
+                            <div><a href="/accounts/profile/">Profile</a> &nbsp; <a href="/accounts/logout/">Log Out</a></div>
                         {% else %}
                             <a href="/accounts/login/">Log In</a> or <a href="/accounts/register/">Register</a>
                         {% endif %}
