@@ -2,9 +2,16 @@
 
 {% block content %}
 <h2>{{ name }} Profile</h2>
-{% if snippets.count %}
+<h3>{{ name }} Snippets</h3>
+{% if snippets.exists %}
 {% include 'core/snippet_list.html' %}
 {% else %}
 No snippets
+{% endif %}
+<h3>{{ name }} Favorite Snippets</h3>
+{% if favorites.exists %}
+{% include 'core/snippet_list.html' with snippets=favorites %}
+{% else %}
+No favorite snippets
 {% endif %}
 {% endblock %}

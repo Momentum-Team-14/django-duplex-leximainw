@@ -34,6 +34,7 @@ def user_profile(request, pk=None):
             'profile': user,
             'name': name,
             'snippets': viewable_snippets(request.user).filter(author=user),
+            'favorites': viewable_snippets(request.user).intersection(user.favorite_snippets.all())
         })
 
 
