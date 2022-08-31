@@ -1,5 +1,8 @@
+{% load static %}
+
 <div>
     {% for snippet in snippets %}
     {% include 'core/snippet.html' %}
     {% endfor %}
 </div>
+<script src="{% static 'js/favorites.js' %}"></script>
