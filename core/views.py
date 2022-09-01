@@ -4,7 +4,6 @@ from django.shortcuts import (
     redirect,
     render,
 )
-from django.http import Http404
 from api_snippets.models import Snippet
 from .forms import SnippetForm
 from .models import User
@@ -57,7 +56,7 @@ def snippets_edit(request, pk=None):
         raise PermissionDenied()
     if pk is not None:
         snippet = get_object_or_404(Snippet, pk=pk)
-        if not request.user in snippet.editors.all():
+        if request.user not in snippet.editors.all():
             raise PermissionDenied()
     else:
         snippet = None
