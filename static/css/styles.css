@@ -136,14 +136,19 @@ main h1
     display: flex;
 }
 
-.flex.right
+.flex.align-center
 {
-    justify-content: flex-end;
+    align-items: center;
 }
 
 .flex.between
 {
     justify-content: space-between;
+}
+
+.flex.right
+{
+    justify-content: flex-end;
 }
 
 .grid

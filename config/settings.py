@@ -57,6 +57,7 @@ AUTH_USER_MODEL = 'core.User'
 SITE_TITLE = 'Django Duplex'
 SITE_NAME = '<div>Django Duplex</div><div class="subtitle">A site with miscellaneous Django stuff.</div>'
 LOGIN_REDIRECT_URL = '/'
+SEARCH_COUNT = 20
 
 TEMPLATES = [
     {

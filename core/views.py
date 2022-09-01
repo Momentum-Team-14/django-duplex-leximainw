@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.core.exceptions import PermissionDenied
+from django.http.response import HttpResponseBadRequest
 from django.shortcuts import (
     get_object_or_404,
     redirect,
@@ -7,7 +9,12 @@ from django.shortcuts import (
 from api_snippets.models import Snippet
 from .forms import SnippetForm
 from .models import User
-from .shortcuts import recent_snippets, viewable_snippets
+from .shortcuts import (
+    newest_viewable_snippets,
+    recent_snippets,
+    search_snippets,
+    viewable_snippets,
+)
 
 
 def homepage(request):
@@ -23,8 +30,6 @@ def user_profile(request, pk=None):
             return redirect('User profile', pk=user.pk)
     else:
         user = get_object_or_404(User, pk=pk)
-        print(user.pk)
-        print(request.user)
         if user.pk == request.user.pk:
             name = "Your"
         else:
@@ -37,11 +42,32 @@ def user_profile(request, pk=None):
         })
 
 
+def search_profile(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    query = request.GET.get('query', '')
+    if not query:
+        raise HttpResponseBadRequest()
+    snippets = search_snippets(viewable_snippets(request.user)
+        & (Snippet.objects.filter(author=user)
+                | user.favorite_snippets.all()), query)[:settings.SEARCH_COUNT]
+    return render(request, 'core/snippet_results.html', {
+        'subtitle': f'Results for {query}:',
+        'snippets': snippets,
+    })
+
+
 def snippets_recent(request):
-    return render(request, 'core/recent_snippets_page.html', {'snippets': recent_snippets(request.user)})
+    query = request.GET.get('query', '')
+    if not query:
+        return render(request, 'core/recent_snippets_page.html', {'snippets': recent_snippets(request.user)})
+    snippets = search_snippets(newest_viewable_snippets(request.user), query)[:settings.SEARCH_COUNT]
+    return render(request, 'core/snippet_results.html', {
+        'subtitle': f'Results for {query}:',
+        'snippets': snippets,
+    })
 
 
-def snippets_details(request, pk=None):
+def snippets_details(request, pk):
     snippet = get_object_or_404(Snippet, pk=pk)
     if not (snippet.allow_view or request.user in snippet.editors.all() or request.user == snippet.author):
         raise PermissionDenied()
@@ -81,7 +107,7 @@ def snippets_edit(request, pk=None):
         })
 
 
-def snippets_delete(request, pk=None):
+def snippets_delete(request, pk):
     if not request.user.is_authenticated:
         raise PermissionDenied()
     snippet = get_object_or_404(Snippet, pk=pk)
@@ -99,7 +125,7 @@ def snippets_delete(request, pk=None):
         })
 
 
-def snippets_fork(request, pk=None):
+def snippets_fork(request, pk):
     if not request.user.is_authenticated:
         raise PermissionDenied()
     snippet = get_object_or_404(Snippet, pk=pk)

@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>{{ name }} Profile</h2>
+<div class="flex between">
+    <h2>{{ name }} Profile</h2>
+    <form class="flex align-center" action="search">
+        <label for="query">Search:</label>
+        <input class="mx-1" name="query" type="text">
+        <button class="btn btn-primary">{% include 'icons/search.svg' %}</button>
+    </form>
+</div>
 <h3>{{ name }} Snippets</h3>
 {% if snippets.exists %}
 {% include 'core/snippet_list.html' %}

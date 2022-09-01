@@ -3,7 +3,14 @@
 {% block content %}
 {% if user.is_authenticated %}<div id="new"><a href="{% url 'Create snippet' %}">Create New Snippet</a></div>{% endif %}
 <div id="recent">
-    <h2>Recent Snippets</h2>
+    <div class="flex between">
+        <h2>Recent Snippets</h2>
+        <form class="flex align-center" action="{% url 'Search recent snippets' %}">
+            <label for="query">Search:</label>
+            <input class="mx-1" name="query" type="text">
+            <button class="btn btn-primary">{% include 'icons/search.svg' %}</button>
+        </form>
+    </div>
     {% include 'core/snippet_list.html' %}
 </div>
 {% endblock %}

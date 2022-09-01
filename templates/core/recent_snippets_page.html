@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Recent Snippets</h2>
+<div class="flex between">
+    <h2>Recent Snippets</h2>
+    <form class="flex align-center" action="{% url 'Search recent snippets' %}">
+        <label for="query">Search:</label>
+        <input class="mx-1" name="query" type="text">
+        <button class="btn btn-primary">{% include 'icons/search.svg' %}</button>
+    </form>
+</div>
 {% include 'core/snippet_list.html' %}
 {% endblock %}
