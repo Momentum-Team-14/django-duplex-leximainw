@@ -13,4 +13,6 @@ urlpatterns = [
     path('snippets/<int:pk>/edit/', views.snippets_edit, name='Edit snippet'),
     path('snippets/<int:pk>/delete/', views.snippets_delete, name='Delete snippet'),
     path('snippets/<int:pk>/fork/', views.snippets_fork, name='Fork snippet'),
+    path('languages/<str:name>/', views.languages_details, name='Language details'),
+    path('languages/<str:name>/search', views.languages_search, name='Search by language'),
 ]

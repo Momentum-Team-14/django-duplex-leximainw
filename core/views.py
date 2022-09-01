@@ -6,7 +6,7 @@ from django.shortcuts import (
     redirect,
     render,
 )
-from api_snippets.models import Snippet
+from api_snippets.models import Language, Snippet
 from .forms import SnippetForm
 from .models import User
 from .shortcuts import (
@@ -138,3 +138,26 @@ def snippets_fork(request, pk):
     snippet.save()
     snippet.editors.add(request.user)
     return redirect('Snippet details', pk=snippet.pk)
+
+
+def languages_details(request, name):
+    language = get_object_or_404(Language, name=name)
+    snippets = newest_viewable_snippets(request.user).filter(language__name=language.name)
+    return render(request, 'core/snippet_results.html', {
+        'allow_search': True,
+        'subtitle': f'{language.name} snippets:',
+        'snippets': snippets,
+    })
+
+
+def languages_search(request, name):
+    language = get_object_or_404(Language, name=name)
+    query = request.GET.get('query', '')
+    if not query:
+        raise HttpResponseBadRequest()
+    snippets = newest_viewable_snippets(request.user).filter(language__name=language.name)
+    snippets = search_snippets(snippets, query)
+    return render(request, 'core/snippet_results.html', {
+        'subtitle': f'{language.name} snippets matching {query}:',
+        'snippets': snippets,
+    })

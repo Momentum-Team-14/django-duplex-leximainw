@@ -4,7 +4,7 @@
         <a href="{% url 'Snippet details' pk=snippet.pk %}">{{ snippet.title }}</a>
         {% if user in snippet.editors.all %}<a href="{% url 'Edit snippet' pk=snippet.pk %}">{% include 'icons/pencil-fill.svg' %}</a>{% endif %}{% if user == snippet.author %}<a href="{% url 'Delete snippet' pk=snippet.pk %}">{% include 'icons/trash-fill.svg' %}</a>{% endif %}{% if user.is_authenticated and snippet.allow_forks or user in snippet.editors.all %}<a href="{% url 'Fork snippet' pk=snippet.pk %}">{% include 'icons/share.svg' %}</a>{% endif %}
     </div>
-    <div class="lang">written in {{ snippet.language.name }}{% if snippet.language_version is not None %} {{ snippet.language_version }}{% endif %}</div>
+    <div class="lang">written in <a href="{% url 'Language details' name=snippet.language.name %}">{{ snippet.language.name }}</a>{% if snippet.language_version is not None %} {{ snippet.language_version }}{% endif %}</div>
     <div class="fork-info">{% if snippet.parent %}forked from <a href="{% url 'Snippet details' pk=snippet.parent.pk %}">{{ snippet.parent.title }}</a> &nbsp; {% endif %}forked {% include 'pluralize_count.html' with value=snippet.forks.count text=" time" %}</div>
     <div class="by">by <a href="{% url 'User profile' pk=snippet.author.pk %}">{{ snippet.author.username }}</a></div>
     {% if detailed %}
