@@ -1,6 +1,6 @@
 <article class="snippet">
     <div class="title">
-        {% if user.is_authenticated %}<a class="favorite" href="{% url 'Favorite snippet' pk=snippet.pk %}"><span{% if snippet in request.user.favorite_snippets.all %} class="hidden"{% endif %}>{% include 'icons/star.svg' %}</span><span{% if snippet not in request.user.favorite_snippets.all %} class="hidden"{% endif %}>{% include 'icons/star-fill.svg' %}</span></a>{% endif %}
+        {% if not hide_copy %}<a class="clip-copy" href="#" onclick="event.preventDefault()" data-clipboard-target="#snippet-{{ snippet.id }}">{% include 'icons/clipboard-plus.svg' %}</a>{% endif %}{% if user.is_authenticated %}<a class="favorite" href="{% url 'Favorite snippet' pk=snippet.pk %}"><span{% if snippet in request.user.favorite_snippets.all %} class="hidden"{% endif %}>{% include 'icons/star.svg' %}</span><span{% if snippet not in request.user.favorite_snippets.all %} class="hidden"{% endif %}>{% include 'icons/star-fill.svg' %}</span></a>{% endif %}
         <a href="{% url 'Snippet details' pk=snippet.pk %}">{{ snippet.title }}</a>
         {% if user in snippet.editors.all %}<a href="{% url 'Edit snippet' pk=snippet.pk %}">{% include 'icons/pencil-fill.svg' %}</a>{% endif %}{% if user == snippet.author %}<a href="{% url 'Delete snippet' pk=snippet.pk %}">{% include 'icons/trash-fill.svg' %}</a>{% endif %}{% if user.is_authenticated and snippet.allow_forks or user in snippet.editors.all %}<a href="{% url 'Fork snippet' pk=snippet.pk %}">{% include 'icons/share.svg' %}</a>{% endif %}
     </div>
@@ -10,5 +10,5 @@
     {% if detailed %}
         <div class="details">{{ snippet.description }}</div>
     {% endif %}
-    <code class="hljs{% if snippet.language is not None %} language-{{ snippet.language.hljs_name }}{% endif %}">{{ snippet.code }}</code>
+    <code id="snippet-{{ snippet.id }}" class="hljs{% if snippet.language is not None %} language-{{ snippet.language.hljs_name }}{% endif %}">{{ snippet.code }}</code>
 </article>
